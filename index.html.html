@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مُرشد | خريطة المبنى</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+:root{--bg:#F5F6FA;--card:#fff;--ink:#1E1B2E;--mut:#6B6F85;--line:#E4E5EF;--p:#4C1D95;--p2:#7C3AED;--soft:#F1EBFD;--mapbg:#EEF0F7;--hall:#E4DFF5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15131F;--card:#1F1C2E;--ink:#F1EFFA;--mut:#A6A3BC;--line:#33304A;--p:#A78BFA;--soft:#2B2547;--mapbg:#181626;--hall:#2A2646}}
+:root[data-theme="dark"]{--bg:#15131F;--card:#1F1C2E;--ink:#F1EFFA;--mut:#A6A3BC;--line:#33304A;--p:#A78BFA;--soft:#2B2547;--mapbg:#181626;--hall:#2A2646}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,system-ui,sans-serif;line-height:1.5}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--p2);outline-offset:2px}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.side{background:var(--card);border-inline-start:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+.brand{font-size:28px;font-weight:800;color:var(--p);padding:0 10px 14px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.side a{display:flex;gap:10px;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:var(--ink);text-decoration:none}
+.side a:hover{background:var(--soft)}.side a[aria-current]{background:var(--soft);color:var(--p);font-weight:700}
+.side a i{width:8px;height:8px;border-radius:50%;background:var(--mut)}.side a[aria-current] i{background:var(--p2)}
+.lang{margin-top:auto;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);font-weight:700;color:var(--p);cursor:pointer}
+main{padding:22px 24px 40px;min-width:0}
+h1{margin:0;font-size:28px;font-weight:800}.sub{margin:2px 0 16px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:16px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px}
+.panel{display:grid;gap:14px}
+.srch{width:100%;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg)}
+.chk{display:flex;gap:10px;align-items:center;min-height:44px;margin-top:6px;cursor:pointer;font-size:14px}.chk input{width:22px;height:22px;accent-color:var(--p2);flex:none}
+.lh{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:8px}
+.cnt{background:var(--soft);color:var(--p);border-radius:20px;padding:0 10px;font-size:13px}
+.list{max-height:300px;overflow:auto;display:grid;gap:6px}
+.it{display:flex;gap:10px;align-items:center;width:100%;min-height:52px;padding:6px 10px;border-radius:12px;border:0;background:transparent;text-align:start;cursor:pointer}
+.it:hover{background:var(--soft)}.it[aria-pressed="true"]{background:var(--p);color:#fff}
+.sw{width:34px;height:34px;border-radius:10px;flex:none;border:1px solid rgba(0,0,0,.08)}
+.it b{display:block;font-size:15px}.it small{opacity:.75;font-size:12px}.it .t{margin-inline-start:auto;font-size:12px;opacity:.8;white-space:nowrap}
+.dir{background:linear-gradient(135deg,#4C1D95,#7C3AED);color:#fff;border:0}
+.dir .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.dir small{opacity:.8}.dir h3{margin:0;font-size:20px}
+.x{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer;flex:none}
+.st{display:flex;gap:28px;border-top:1px solid rgba(255,255,255,.25);margin-top:12px;padding-top:10px}.st div{display:flex;flex-direction:column}.st b{font-size:18px}
+.go{margin-top:10px;min-height:44px;width:100%;border:0;border-radius:12px;background:#fff;color:#4C1D95;font-weight:700;cursor:pointer}
+.tabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.tabs span{color:var(--mut);font-size:14px}
+.tabs button{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--p);border-color:var(--p);color:#fff;font-weight:700}
+html[data-theme="dark"] .tabs button[aria-pressed="true"],html[data-theme="dark"] .it[aria-pressed="true"]{color:#15131F}
+.map{overflow-x:auto;border-radius:14px}.map svg{display:block;width:100%;min-width:640px;height:auto}
+.rm{cursor:pointer}.rm rect{stroke:#8a8fa6;stroke-width:1;stroke-opacity:.5}.rm text{fill:#1E1B2E;font-size:13px;font-weight:700;pointer-events:none}
+.rm:hover rect{stroke:#4C1D95;stroke-opacity:1;stroke-width:2}.rm.sel rect{fill:#4C1D95!important;stroke-opacity:1}.rm.sel text,.rm.lab text{fill:#fff}
+.mk{font-size:12px;fill:var(--mut);font-weight:700}
+.path{fill:none;stroke:#2F6FED;stroke-width:3.5;stroke-dasharray:7 6;stroke-linecap:round;stroke-linejoin:round}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--mut)}.leg span{display:flex;gap:6px;align-items:center}.leg i{width:14px;height:14px;border-radius:4px;display:inline-block;border:1px solid rgba(0,0,0,.12)}
+.note{color:var(--mut);font-size:13px;margin:12px 0 0}
+@media (max-width:960px){.app{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;border:0;border-bottom:1px solid var(--line);padding:10px 14px}.brand{border:0;margin:0;padding:0 8px}.side a{min-height:44px}.lang{margin:0}.grid{grid-template-columns:1fr}main{padding:16px 12px 32px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+<div class="brand">مُرشد</div>
+<a href="#"><i></i>لوحة التحكم</a><a href="#"><i></i>المساعد الذكي</a><a href="#"><i></i>جدولي الدراسي</a><a href="#"><i></i>مخطط الدراسة</a><a href="#" aria-current="page"><i></i>خريطة المبنى</a><a href="#"><i></i>خدمات الجامعة</a>
+<button class="lang" type="button">English</button>
+</aside>
+<main>
+<h1>خريطة المبنى</h1>
+<p class="sub">اضغط على أي قاعة أو معمل أو مكتب داخل مبنى الجامعة.</p>
+<div class="grid">
+<div class="panel">
+<div class="card"><input id="q" class="srch" type="search" placeholder="ابحث عن قاعات، معامل..." aria-label="بحث" autocomplete="off">
+<label class="chk"><input type="checkbox" id="acc"><span>مسار مناسب للكراسي المتحركة</span></label></div>
+<div class="card"><div class="lh"><span id="lt">القاعات في هذا الطابق</span><span class="cnt" id="cn"></span></div><div class="list" id="ls"></div></div>
+<div class="card dir" id="dr" aria-live="polite" hidden></div>
+</div>
+<div class="card">
+<div class="tabs" id="tb"><span>الطابق</span></div>
+<div class="map" id="mp"></div>
+<div class="leg"><span><i style="background:#2F6FED;border-radius:50%"></i>أنت هنا</span><span><i style="background:#4C1D95"></i>الوجهة</span><span><i style="background:#CFE8F3"></i>قاعة دراسية</span><span><i style="background:#3E9B52"></i>معمل</span><span><i style="background:#F6EBB5"></i>مدرج</span><span><i style="background:#DAD1F2"></i>خدمات</span><span><i style="background:#D9D9DF"></i>مرافق</span></div>
+<p class="note">المخطط مبني على فكرة مخطط الكلية. أسماء قاعات الطوابق العليا تجريبية إلى أن تُضاف بياناتها الفعلية.</p>
+</div>
+</div>
+</main>
+</div>
+<script>
+var FL=['الأرضي','الأول','الثاني','الثالث'];
+var T={c:['قاعة دراسية','#CFE8F3'],l:['معمل','#3E9B52'],s:['خدمات','#DAD1F2'],a:['مدرج','#F6EBB5'],u:['مرفق','#D9D9DF']};
+var G=[['الاستقبال','u',20,20,110,100],['قاعة 11','c',135,20,110,100],['قاعة 10','c',250,20,110,100],['قاعة 9','c',440,20,110,100],['مدرج 1','a',555,20,110,100],['قاعة 7','c',670,20,110,100],
+['قاعة 26','c',20,520,110,100],['قاعة 27','c',135,520,110,100],['مدرج 2','a',250,520,110,100],['مدرج 3','a',440,520,110,100],['قاعة 35','c',555,520,110,100],['قاعة 36','c',670,520,110,100],
+['قاعة 17','c',20,130,110,70],['قاعة 19','c',20,205,110,70],['قاعة 23','c',20,365,110,70],['قاعة 24','c',20,440,110,70],
+['معمل حاسب 3','l',670,130,110,70],['معمل حاسب 1','l',670,205,110,70],['معمل حاسب 41','l',670,365,110,70],['معمل حاسب 38','l',670,440,110,70],
+['قاعة 13','c',150,135,125,65],['كفتيريا','s',150,205,125,65],['قاعة 47','c',150,365,125,65],['مصلى','u',150,435,125,65],
+['قاعة 12','c',525,135,125,65],['استراحة طالبات','s',525,205,125,65],['وحدة الأنشطة والخدمات الطلابية','s',525,365,125,65],['قاعة 44','c',525,435,125,65],
+['مصعد','u',150,300,55,40],['دورة مياه','u',215,300,60,40],['دورة مياه','u',525,300,60,40],['مصعد','u',595,300,55,40]];
+var st={f:0,sel:null,acc:false,q:''};
+function $(i){return document.getElementById(i)}
+function rooms(f){var n=0;return G.map(function(g,i){var t=g[1],nm=g[0];
+ if(f>0&&!(/مصعد|دورة/.test(nm))){t='c';nm='قاعة '+f+('0'+(++n)).slice(-2)}
+ return{id:f+'-'+i,f:f,n:nm,t:t,x:g[2],y:g[3],w:g[4],h:g[5]}})}
+function wrap(s,m){var L=[],c='';s.split(' ').forEach(function(x){if((c+' '+x).trim().length>m&&c){L.push(c);c=x}else c=(c+' '+x).trim()});L.push(c);return L}
+var W=80,H=64;
+function solve(rs,sx,sy){var own=new Int16Array(W*H).fill(-1);
+ rs.forEach(function(r,k){for(var y=0;y<H;y++)for(var x=0;x<W;x++){var cx=x*10+5,cy=y*10+5;if(cx>r.x&&cx<r.x+r.w&&cy>r.y&&cy<r.y+r.h)own[y*W+x]=k}});
+ var d=new Int32Array(W*H).fill(-1),p=new Int32Array(W*H).fill(-1),q=[sy*W+sx],best=rs.map(function(){return{d:1e9,c:-1}});d[q[0]]=0;
+ for(var h=0;h<q.length;h++){var c=q[h],x=c%W,y=(c-x)/W;
+  [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(v){var nx=x+v[0],ny=y+v[1];if(nx<0||ny<0||nx>=W||ny>=H)return;var k=ny*W+nx,o=own[k];
+   if(o>=0){if(d[c]<best[o].d){best[o]={d:d[c],c:c}}return}
+   if(d[k]<0){d[k]=d[c]+1;p[k]=c;q.push(k)}})}
+ return{best:best,p:p}}
+function route(r,rs,res){var b=res.best[r.k];if(b.c<0)return null;var pts=[],c=b.c;
+ while(c>=0){pts.push([(c%W)*10+5,Math.floor(c/W)*10+5]);c=res.p[c]}pts.reverse();
+ var last=pts[pts.length-1];pts.push([Math.max(r.x,Math.min(r.x+r.w,last[0])),Math.max(r.y,Math.min(r.y+r.h,last[1]))]);
+ var o=[pts[0]];for(var i=1;i<pts.length-1;i++){var a=o[o.length-1],b2=pts[i],n=pts[i+1];if((b2[0]-a[0])*(n[1]-b2[1])!==(b2[1]-a[1])*(n[0]-b2[0]))o.push(b2)}o.push(pts[pts.length-1]);
+ var len=0;for(i=1;i<o.length;i++)len+=Math.abs(o[i][0]-o[i-1][0])+Math.abs(o[i][1]-o[i-1][1]);return{pts:o,m:Math.round(len/10)}}
+function mins(m){return Math.max(1,Math.ceil(m/78))}
+function render(){
+ var rs=rooms(st.f);rs.forEach(function(r,k){r.k=k});
+ var S=st.f==0?[400,630,'مدخل الكلية']:(st.acc?[622,350,'المصعد']:[400,250,'الدرج']);
+ var res=solve(rs,Math.floor(S[0]/10),Math.floor(S[1]/10));
+ var tb=$('tb');tb.innerHTML='<span>الطابق</span>'+FL.map(function(n,i){return '<button type="button" data-f="'+i+'" aria-pressed="'+(st.f==i)+'">'+(i?'الطابق ':'الطابق ')+n+'</button>'}).join('');
+ var pts=[];for(var a=0;a<8;a++){var an=(22.5+45*a)*Math.PI/180;pts.push((400+92*Math.cos(an)).toFixed(0)+','+(320+92*Math.sin(an)).toFixed(0))}
+ var s='<svg viewBox="0 0 800 640" role="img" aria-label="مخطط الطابق '+FL[st.f]+'"><rect width="800" height="640" fill="var(--mapbg)"/><polygon points="'+pts.join(' ')+'" fill="var(--hall)" stroke="#8a8fa6" stroke-opacity=".5"/><text x="400" y="326" text-anchor="middle" class="mk" style="font-size:15px">بهو الكلية</text>';
+ s+='<text class="mk" x="400" y="72" text-anchor="middle">مدخل</text><text class="mk" x="400" y="585" text-anchor="middle">مدخل</text><text class="mk" x="75" y="324" text-anchor="middle">مدخل</text><text class="mk" x="725" y="324" text-anchor="middle">مدخل</text>';
+ var sel=st.sel&&st.sel.f==st.f?rs[st.sel.k]:null;
+ rs.forEach(function(r){var L=wrap(r.n,Math.floor(r.w/8)),y0=r.y+r.h/2-(L.length-1)*8+4,isS=sel&&sel.k==r.k;
+  s+='<g class="rm'+(r.t=='l'?' lab':'')+(isS?' sel':'')+'" tabindex="0" role="button" aria-label="'+r.n+'" data-k="'+r.k+'"><rect x="'+r.x+'" y="'+r.y+'" width="'+r.w+'" height="'+r.h+'" rx="8" fill="'+T[r.t][1]+'"/>'+L.map(function(t,i){return '<text x="'+(r.x+r.w/2)+'" y="'+(y0+i*16)+'" text-anchor="middle">'+t+'</text>'}).join('')+'</g>'});
+ var rt=sel?route(sel,rs,res):null;
+ if(rt){s+='<polyline class="path" points="'+rt.pts.map(function(p){return p.join(',')}).join(' ')+'"/><circle cx="'+rt.pts[rt.pts.length-1][0]+'" cy="'+rt.pts[rt.pts.length-1][1]+'" r="7" fill="#4C1D95" stroke="#fff" stroke-width="2"/>'}
+ s+='<circle cx="'+S[0]+'" cy="'+S[1]+'" r="9" fill="#2F6FED" stroke="#fff" stroke-width="3"/><text class="mk" x="'+(S[0]+16)+'" y="'+(S[1]+4)+'" style="fill:#2F6FED">أنت هنا · '+S[2]+'</text></svg>';
+ $('mp').innerHTML=s;
+ var q=st.q.trim(),items;
+ if(q){items=[0,1,2,3].flatMap(function(f){var r2=f==st.f?rs:rooms(f);r2.forEach(function(r,k){r.k=k});return r2}).filter(function(r){return r.n.indexOf(q)>-1});$('lt').textContent='نتائج البحث'}
+ else{items=rs;$('lt').textContent='القاعات في هذا الطابق'}
+ $('cn').textContent=items.length;
+ $('ls').innerHTML=items.map(function(r){var on=st.sel&&st.sel.id==r.id,tm=r.f==st.f?(res.best[r.k].c<0?'':mins(Math.round(res.best[r.k].d)+0)+' د'):'الطابق '+FL[r.f];
+  if(r.f==st.f&&res.best[r.k].c>=0){var rr=route(r,rs,res);tm=mins(rr.m)+' د'}
+  return '<button class="it" type="button" data-id="'+r.id+'" aria-pressed="'+!!on+'"><span class="sw" style="background:'+T[r.t][1]+'"></span><span><b>'+r.n+'</b><small>'+T[r.t][0]+'</small></span><span class="t">'+tm+'</span></button>'}).join('')||'<div class="note">لا توجد نتائج.</div>';
+ var D=$('dr');
+ if(!st.sel){D.hidden=true}else{D.hidden=false;var ss=st.sel;
+  if(ss.f!=st.f)D.innerHTML='<div class="top"><div><small>الوجهة</small><h3>'+ss.n+'</h3><small>الطابق '+FL[ss.f]+' · '+T[ss.t][0]+'</small></div><button class="x" type="button" id="cl" aria-label="إغلاق">×</button></div><button class="go" type="button" id="gt">اعرض الطابق '+FL[ss.f]+'</button>';
+  else D.innerHTML='<div class="top"><div><small>الطريق إلى</small><h3>'+ss.n+'</h3><small>الطابق '+FL[ss.f]+' · '+T[ss.t][0]+'</small></div><button class="x" type="button" id="cl" aria-label="إغلاق">×</button></div><div class="st"><div><small>المسافة</small><b>'+(rt?rt.m:'-')+' م</b></div><div><small>الوقت التقريبي</small><b>'+(rt?mins(rt.m):'-')+' د</b></div></div>';
+  $('cl').onclick=function(){st.sel=null;render()};var g=$('gt');if(g)g.onclick=function(){st.f=ss.f;render()}}
+}
+function pick(el){var f=st.f,id=el.dataset.id;
+ if(id){var p=id.split('-'),r=rooms(+p[0])[+p[1]];r.k=+p[1];st.sel=r;st.f=+p[0]}
+ else{var r2=rooms(f)[+el.dataset.k];r2.k=+el.dataset.k;st.sel=r2}render()}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-k],[data-id]');if(!t)return;
+ if(t.dataset.f!==undefined){st.f=+t.dataset.f;render()}else pick(t)});
+document.addEventListener('keydown',function(e){if(e.key=='Enter'||e.key==' '){var t=e.target.closest&&e.target.closest('g[data-k]');if(t){e.preventDefault();pick(t)}}});
+$('q').addEventListener('input',function(){st.q=this.value;render()});
+$('acc').addEventListener('change',function(){st.acc=this.checked;render()});
+render();
+</script>
+</body>
+</html>
